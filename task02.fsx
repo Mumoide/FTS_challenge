@@ -1,4 +1,4 @@
-// Task 1
+// Task 2
 // Function intAdd takes a string as input and returns an integer as output.
 let intAdd (string: string) =
     // Creating a try-with block to handle potential exceptions.
@@ -23,4 +23,4 @@ let intAdd (string: string) =
     // If the input string is not in the correct format, return 0
     0 
 // I have learned that %d is used to print a digit
-printfn "%d" (intAdd "1,2,4,5,6,7,8,9,10,10") // Output: 3
+printfn "%d" (intAdd "1,2,4,5,6,7,8,9,10,10") // Output: 62

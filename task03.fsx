@@ -1,4 +1,4 @@
-// Task 1
+// Task 3
 // Function intAdd takes a string as input and returns an integer as output.
 let intAdd (string: string) =
     // Creating a try-with block to handle potential exceptions.
@@ -8,7 +8,7 @@ let intAdd (string: string) =
             string = "" then 0 // If the input string is empty, return 0
         // Otherwise, continue with the execution.
         else
-            // Split the input string by commas to get an array of numbers in string format.
+            // Now this section splits the string by comma or by newline.
             let numbers = string.Split(',','\n')
             // After this section, we have removed the restriction of having a maximum of two elements.
             // Convert the data type of numbers array to be integers by mapping each element to the 'int' function.
@@ -23,4 +23,4 @@ let intAdd (string: string) =
     // If the input string is not in the correct format, return 0
     0 
 // I have learned that %d is used to print a digit
-printfn "%d" (intAdd "1\n2,3") // Output: 3
+printfn "%d" (intAdd "1\n2,3") // Output: 6
