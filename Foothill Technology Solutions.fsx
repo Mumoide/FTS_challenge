@@ -1,24 +1,30 @@
 // Task 1
-// I have to create a method to add two numbers contained in a string, where the numbers are separated by a comma.
-// In a traditional manner, I would define a method or function that takes a string as input, split the numbers by the comma,
-// converts them into integers, and then sums them up.
-// But how do I define a method in F#?
-// I can use the 'let' keyword to define a function.
-// Now I need to know how to define the parameters, which is done by specifying the parameter name and its type in parentheses.
-// The return type of the function can be inferred by the compiler, so I don't need to specify it.
+// Function intAdd takes a string as input and returns an integer as output.
 let intAdd (string: string) =
-    // I will approach this problem as I described above.
-    // First, I need to split the string by the comma to get the individual numbers. For this I can use the 'Split' method from the 'String' class.
-    let numbers = string.Split(',')
-    // 
-    // Then, I can convert each number from a string to an integer.
-    // For this step, I have to cast each string to an integer, how do I do it in F#?
-    // I can use the 'int' function to convert a string to an integer.
-    // I have to apply this funciton to each element in the array, this would be a mapping operation.
-    // In F#, I can use the 'Array.map' function to apply a function to each element in an array.
-    // The operator '|>' is used to pass the result of the left side to the function on the right side, this is called forward pipe operator
-    let intNumbers = numbers |> Array.map int
-    // Finally, I can sum the integers and return the result using the 'Array.sum' function.
-    Array.sum intNumbers
+    // Creating a try-with block to handle potential exceptions.
+    try
+        // If the input string is empty, return 0.
+        if 
+            string = "" then 0 // If the input string is empty, return 0
+        // Otherwise, continue with the execution.
+        else
+            // Split the input string by commas to get an array of numbers in string format.
+            let numbers = string.Split(',')
+            // After splitting, check if the length of the numbers array is greater than 2.
+            if numbers.Length > 2 then 
+                // If there are more than two elements, raise a FormatException with a custom message.
+                raise (System.FormatException("A maximum of two elements is allowed"))
+            else
+                // Convert the data type of numbers array to be integers by mapping each element to the 'int' function.
+                let intNumbers = numbers |> Array.map int
+                // Sum the elements of the intNumbers array and return the result.
+                Array.sum intNumbers
+    with
+    // First and only pattern to match the exception of this function.
+    | :? System.FormatException as ex -> 
+    // Prints the message of the exception to the console.
+    printfn "%s" ex.Message
+    // If the input string is not in the correct format, return 0
+    0 
 
 printfn "%d" (intAdd "1,2") // Output: 3
