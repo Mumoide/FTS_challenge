@@ -10,15 +10,11 @@ let intAdd (string: string) =
         else
             // Split the input string by commas to get an array of numbers in string format.
             let numbers = string.Split(',')
-            // After splitting, check if the length of the numbers array is greater than 2.
-            if numbers.Length > 2 then 
-                // If there are more than two elements, raise a FormatException with a custom message.
-                raise (System.FormatException("A maximum of two elements is allowed"))
-            else
-                // Convert the data type of numbers array to be integers by mapping each element to the 'int' function.
-                let intNumbers = numbers |> Array.map int
-                // Sum the elements of the intNumbers array and return the result.
-                Array.sum intNumbers
+            // After this section, we have removed the restriction of having a maximum of two elements.
+            // Convert the data type of numbers array to be integers by mapping each element to the 'int' function.
+            let intNumbers = numbers |> Array.map int
+            // Sum the elements of the intNumbers array and return the result.
+            Array.sum intNumbers
     with
     // First and only pattern to match the exception of this function.
     | :? System.FormatException as ex -> 
@@ -26,5 +22,5 @@ let intAdd (string: string) =
     printfn "%s" ex.Message
     // If the input string is not in the correct format, return 0
     0 
-
-printfn "%d" (intAdd "1,2") // Output: 3
+// I have learned that %d is used to print a digit
+printfn "%d" (intAdd "1,2,4,5,6,7,8,9,10,10") // Output: 3
