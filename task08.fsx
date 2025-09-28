@@ -1,9 +1,15 @@
-// Task 7
+// Task 8
 // Defining a new Exception type for handling negative numbers
 exception NegativeNumberException of string
 
+// Function that returns all the custom delimiters as a tuple
+let customDelimiters(input: string) =
+    // Replaces the closing brackets with empty strings, then splits the string by the opening brackets
+    input.Replace("]","").Split('[')
+
 // Function that removes numbers greater than 1000
 let removeBigNumbers(numbers: int array) =
+    // Filters the input array, returning only numbers lesser than or equal to 1000
     numbers |> Array.filter (fun x -> x <= 1000)
 
 // Function that raises an exception when a negative number is found in the array of numbers
@@ -20,11 +26,12 @@ let customSplitString (input: string) =
     // Extracting the custom delimiter starting after '//' and ending before the first newline character '\n'.
     // For this the method IndexOf was used to find the index of the first newline character '\n'.
     // The method Substring was used to extract the custom delimiter.
-    let delimiter = (input.Substring(2, input.IndexOf('\n')-2))
+    // The customDelimiters function is used to get all the custom delimiters as an array of strings.
+    let delimiter = customDelimiters(input.Substring(2, input.IndexOf('\n') - 2))
     // Substring is used to extract the string that will be processed, this is the substring after the custom delimiter definition.
     let input = input.Substring(input.IndexOf('\n') + 1)
     // Split the string by the custom delimiter.
-    let numbers = input.Split(delimiter)
+    let numbers = input.Split(delimiter, System.StringSplitOptions.RemoveEmptyEntries)
     // Convert the data type of numbers array to be integers by mapping each element to the 'int' function.
     let intNumbers = numbers |> Array.map int
     // Raise an exception if any negative numbers are found
@@ -77,13 +84,16 @@ let intAdd (string: string) =
         0
 
 // Adding numbers with a custom delimiter
-printfn "Custom delimiter: %d" (intAdd "//;\n1;2;3") // Output: 6
+printfn "Custom delimiter: %d" (intAdd "//[;]\n1;2;3") // Output: 6
 
 // Adding numbers with a custom delimiter of length equal to 2
-printfn "Custom delimiter of length 2: %d" (intAdd "//;.\n5;.5;.5") // Output: 15
+printfn "Custom delimiter of length 2: %d" (intAdd "//[;.]\n5;.5;.5") // Output: 15
 
 // Adding numbers with a custom delimiter of length equal to 4
-printfn "Custom delimiter of length 4: %d" (intAdd "//;.:-\n10;.:-5;.:-2") // Output: 17
+printfn "Custom delimiter of length 4: %d" (intAdd "//[;.:-]\n10;.:-5;.:-2") // Output: 17
+
+// Adding numbers with multiple custom delimiter of different lengths
+printfn "Multiple custom delimiter of different lengths: %d" (intAdd "//[;.:-][;-]\n10;.:-5;.:-2;-5;-3") // Output: 25
 
 // Adding numbers with default delimiters (only comma)
 printfn "Default delimiter: %d" (intAdd "1,2,3,-4") // Exception is raised and 0 is returned
