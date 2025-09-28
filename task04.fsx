@@ -14,7 +14,7 @@ let customSplitString (input: string) =
     // Sum the elements of the intNumbers array and return the result.
     Array.sum intNumbers
 
-// Function that splits the input string by commas or by newline and returns an array of integers.
+// Function that splits the input string by commas or by newline and returns the sum of intgers in an array.
 let defaultSplitString(input: string) =
     // Split the string by comma or by newline.
     let numbers = input.Split(',','\n')
