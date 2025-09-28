@@ -1,6 +1,10 @@
-// Task 5, 'declarative' version
+// Task 6
 // Defining a new Exception type for handling negative numbers
 exception NegativeNumberException of string
+
+// Function that removes numbers greater than 1000
+let removeBigNumbers(numbers: int array) =
+    numbers |> Array.filter (fun x -> x <= 1000)
 
 // Function that raises an exception when a negative number is found in the array of numbers
 let raiseIfNegative (numbers: int array) =
@@ -25,8 +29,8 @@ let customSplitString (input: string) =
     let intNumbers = numbers |> Array.map int
     // Raise an exception if any negative numbers are found
     raiseIfNegative (intNumbers)
-    // Sum the elements of the intNumbers array and return the result.
-    Array.sum intNumbers
+    // Sum the numbers lesser lesser or equal than 1000 of the intNumbers array and return the result.
+    Array.sum (removeBigNumbers(intNumbers))
 
 // Function that splits the input string by commas or by newline and returns an array of integers.
 let defaultSplitString(input: string) =
@@ -36,8 +40,8 @@ let defaultSplitString(input: string) =
     let intNumbers = input.Split(',','\n') |> Array.map int
     // Raise an exception if any negative numbers are found
     raiseIfNegative (intNumbers)
-    // Sum the elements of the intNumbers array and return the result.
-    Array.sum intNumbers
+    // Sum the numbers lesser lesser or equal than 1000 of the intNumbers array and return the result.
+    Array.sum (removeBigNumbers(intNumbers))
 
 // Function splits the input dynamically, being able to handle custom delimiters or default delimiters.
 let splitString (input: string) =
@@ -73,10 +77,19 @@ let intAdd (string: string) =
         0
 
 // Adding numbers with a custom delimiter
-printfn "%d" (intAdd "//;\n1;2;3") // Output: 6
+printfn "Custom delimiter: %d" (intAdd "//;\n1;2;3") // Output: 6
+
+// Adding numbers with a custom delimiter of length equal to 2
+printfn "Custom delimiter of length 2: %d" (intAdd "//;.\n5;.5;.5") // Output: 15
+
+// Adding numbers with a custom delimiter of length equal to 4
+printfn "Custom delimiter of length 4: %d" (intAdd "//;.:-\n10;.:-5;.:-2") // Output: 17
 
 // Adding numbers with default delimiters (only comma)
-printfn "%d" (intAdd "1,2,3,-4") // Exception is raised
+printfn "Default delimiter: %d" (intAdd "1,2,3,-4") // Exception is raised and 0 is returned
 
 // Adding numbers with default delimiters (comma and newline)
-printfn "%d" (intAdd "1\n2,3") // Output: 6
+printfn "Default delimiter (Comma and newline): %d" (intAdd "1\n2,3") // Output: 6
+
+// Adding numbers with default delimiters (only comma) and numbers greater than 1000
+printfn "Default delimiter with numbers greater than 1000: %d" (intAdd "1,2,3,4,1001") // Output: 10

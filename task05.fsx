@@ -78,7 +78,7 @@ let intAdd (string: string) =
 printfn "%d" (intAdd "//;\n1;2;3") // Output: 6
 
 // Adding numbers with default delimiters (only comma)
-printfn "%d" (intAdd "1,2,3,-4") // Output: 6
+printfn "%d" (intAdd "1,2,3,-4") // Exception is raised
 
 // Adding numbers with default delimiters (comma and newline)
 printfn "%d" (intAdd "1\n2,3") // Output: 6
