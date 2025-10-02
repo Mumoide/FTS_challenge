@@ -3,7 +3,7 @@ def defaultDelimiter(input):
     try:
         for delimiter in ['\\n']:
             numbers = input.replace(delimiter, ',')
-        return sum([int(number) for number in input.split(',')])
+        return sum([int(number) for number in numbers.split(',')])
     except ValueError:
         raise ValueError("Invalid input")
 
