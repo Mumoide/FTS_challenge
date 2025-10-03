@@ -47,8 +47,8 @@ def customDelimiter(input):
         delimiter = delimiter.replace("[","")
         # Split multiple delimiters by closing bracket
         delimiter = delimiter.split("]")
-        # Remove empty strings from the list
-        delimiter.remove('')
+        # Remove ALL empty strings from the list
+        delimiter = [delim for delim in delimiter if delim != '']
         # Replace custom delimiter with comma
         for delim in delimiter:
             numbers = numbers.replace(delim, ',')
@@ -87,6 +87,12 @@ def intAdd(numbers):
     return defaultDelimiter(numbers)
     
 print(f"{intAdd("1,2,3\\n4,2000")}") # Output: 10
+
+# Testing multiple custom delimiter of length 1
+print(f"{intAdd("//[-]\\n1-2-3-4-2000-25")}") # Output: 35
+
+# Testing multiple custom delimiter of length 1 and handling empty delimiter
+print(f"{intAdd("//[-][]\\n1-2-3-4-2000-25")}") # Output: 35
 
 # Testing multiple custom delimiter of variable lengths
 print(f"{intAdd("//[xd][lol]\\n1xd2xd3xd4xd2000lol25")}") # Output: 35
